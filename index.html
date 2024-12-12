@@ -3,29 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Circle of Fifths</title>
+    <title>Circle of Fifths Widget</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="circle-container">
-        <svg id="circle"></svg>
-    </div>
-    <div id="info-panel">
-        <h2 id="selected-key">Selected Key: C Major</h2>
-        <p>Scale: <span id="scale">C, D, E, F, G, A, B</span></p>
-        <p>Chords: <span id="chords">C, Dm, Em, F, G, Am, Bdim</span></p>
-        <label for="modes">Mode:</label>
-        <select id="modes">
-            <option value="ionian">Ionian (Major)</option>
-            <option value="dorian">Dorian</option>
-            <option value="phrygian">Phrygian</option>
-            <option value="lydian">Lydian</option>
-            <option value="mixolydian">Mixolydian</option>
-            <option value="aeolian">Aeolian (Minor)</option>
-            <option value="locrian">Locrian</option>
-        </select>
-    </div>
-    <script src="https://d3js.org/d3.v7.min.js"></script>
-    <script src="scripts.js"></script>
+    <header>
+        <div class="container">
+            <h1>Interactive Circle of Fifths</h1>
+            <p>Explore keys, scales, and chords interactively</p>
+        </div>
+    </header>
+
+    <main>
+        <div class="main-content">
+            <div id="circle-container">
+                <svg id="circle"></svg>
+            </div>
+            <div id="info-panel">
+                <h2 id="selected-key">Selected Key: C Major</h2>
+                <p>Scale: <span id="scale">C, D, E, F, G, A, B</span></p>
+                <p>Chords: <span id="chords">C, Dm, Em, F, G, Am, Bdim</span></p>
+                <label for="modes">Mode:</label>
+                <select id="modes">
+                    <option value="ionian">Ionian</option>
+                    <option value="dorian">Dorian</option>
+                    <option value="phrygian">Phrygian</option>
+                    <option value="lydian">Lydian</option>
+                    <option value="mixolydian">Mixolydian</option>
+                    <option value="aeolian">Aeolian (Minor)</option>
+                    <option value="locrian">Locrian</option>
+                </select>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Your Name. All Rights Reserved.</p>
+    </footer>
 </body>
 </html>
