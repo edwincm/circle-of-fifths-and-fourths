@@ -1,0 +1,27 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+#circle-container {
+    margin: 20px auto;
+    width: 600px;
+    height: 600px;
+}
+
+svg {
+    width: 100%;
+    height: 100%;
+}
+
+#info-panel {
+    margin-top: 20px;
+}
+
+select {
+    padding: 5px;
+    font-size: 1rem;
+}
