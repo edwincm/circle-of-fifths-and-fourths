@@ -1,17 +1,17 @@
 // Data for the Circle of Fifths
 const circleOfFifths = [
-    { key: "C", relativeMinor: "Am" },
-    { key: "G", relativeMinor: "Em" },
-    { key: "D", relativeMinor: "Bm" },
-    { key: "A", relativeMinor: "F#m" },
-    { key: "E", relativeMinor: "C#m" },
-    { key: "B", relativeMinor: "G#m" },
-    { key: "F#", relativeMinor: "D#m" },
-    { key: "Db", relativeMinor: "Bbm" },
-    { key: "Ab", relativeMinor: "Fm" },
-    { key: "Eb", relativeMinor: "Cm" },
-    { key: "Bb", relativeMinor: "Gm" },
-    { key: "F", relativeMinor: "Dm" }
+    { key: "C", relativeMinor: "Am", diminished: "Bdim" },
+    { key: "G", relativeMinor: "Em", diminished: "F#dim" },
+    { key: "D", relativeMinor: "Bm", diminished: "C#dim" },
+    { key: "A", relativeMinor: "F#m", diminished: "G#dim" },
+    { key: "E", relativeMinor: "C#m", diminished: "D#dim" },
+    { key: "B", relativeMinor: "G#m", diminished: "A#dim" },
+    { key: "F#", relativeMinor: "D#m", diminished: "Fdim" },
+    { key: "Db", relativeMinor: "Bbm", diminished: "Cdim" },
+    { key: "Ab", relativeMinor: "Fm", diminished: "Gdim" },
+    { key: "Eb", relativeMinor: "Cm", diminished: "Ddim" },
+    { key: "Bb", relativeMinor: "Gm", diminished: "Adim" },
+    { key: "F", relativeMinor: "Dm", diminished: "Edim" }
 ];
 
 // Modes and their intervals
@@ -26,7 +26,7 @@ const modes = {
 };
 
 // Scales and chords
-const notes = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
+const notes = ["C", "Db", "D", "Eb", "E", "F", "F#", "G", "Ab", "A", "Bb", "B"];
 
 function getScale(root, mode) {
     const rootIndex = notes.indexOf(root);
@@ -39,21 +39,21 @@ function getChords(scale) {
 }
 
 // D3 Visualization
-const svg = d3.select("#circle");
-const width = 600;
-const height = 600;
-const radius = 250;
+const g = d3.select("#circle");
+const maj_width = 400;
+const maj_height = 400;
+const maj_radius = 100;
 
-const g = svg.append("g").attr("transform", `translate(${width / 2}, ${height / 2})`);
+const maj = g.append("g").attr("transform", `translate(${maj_width / 2}, ${maj_height / 2})`);
 
 const angleSlice = (2 * Math.PI) / circleOfFifths.length;
 
 circleOfFifths.forEach((keyData, i) => {
     const angle = i * angleSlice - Math.PI / 2;
-    const x = radius * Math.cos(angle);
-    const y = radius * Math.sin(angle);
+    const x = maj_radius * Math.cos(angle);
+    const y = maj_radius * Math.sin(angle);
 
-    g.append("text")
+    maj.append("text")
         .attr("x", x)
         .attr("y", y)
         .attr("text-anchor", "middle")
@@ -63,6 +63,56 @@ circleOfFifths.forEach((keyData, i) => {
         .attr("cursor", "pointer")
         .text(keyData.key)
         .on("click", () => updateKey(keyData.key));
+});
+
+// D3 Visualization
+const minor = d3.select("#circle");
+const min_width = 500;
+const min_height = 500;
+const min_radius = 200;
+
+const min = g.append("g").attr("transform", `translate(${min_width / 2}, ${min_height / 2})`);
+
+circleOfFifths.forEach((keyData, i) => {
+    const angle = i * angleSlice - Math.PI / 2;
+    const m = min_radius * Math.cos(angle);
+    const n = min_radius * Math.sin(angle);
+
+    maj.append("text")
+        .attr("x", m)
+        .attr("y", n)
+        .attr("text-anchor", "middle")
+        .attr("dominant-baseline", "middle")
+        .attr("font-size", "14px")
+        .attr("fill", "black")
+        .attr("cursor", "pointer")
+        .text(keyData.relativeMinor);
+        // .on("click", () => updateKey(keyData.relativeMinor));
+});
+
+// D3 Visualization
+const diminished = d3.select("#circle");
+const dim_width = 300;
+const dim_height = 300;
+const dim_radius = 1500;
+
+const dim = g.append("g").attr("transform", `translate(${dim_width / 2}, ${dim_height / 2})`);
+
+circleOfFifths.forEach((keyData, i) => {
+    const angle = i * angleSlice - Math.PI / 2;
+    const p = dim_radius * Math.cos(angle);
+    const q = dim_radius * Math.sin(angle);
+
+    maj.append("text")
+        .attr("x", p)
+        .attr("y", q)
+        .attr("text-anchor", "middle")
+        .attr("dominant-baseline", "middle")
+        .attr("font-size", "14px")
+        .attr("fill", "black")
+        .attr("cursor", "pointer")
+        .text(keyData.diminished);
+        // .on("click", () => updateKey(keyData.key));
 });
 
 // Update selected key
